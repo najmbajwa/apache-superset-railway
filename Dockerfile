@@ -19,6 +19,7 @@ RUN pip install \
     pymssql \
     pyodbc \
     mysqlclient \
+    sqlalchemy \
     snowflake-sqlalchemy
 
 ENV ADMIN_USERNAME $ADMIN_USERNAME
