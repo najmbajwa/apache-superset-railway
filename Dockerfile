@@ -34,8 +34,8 @@ RUN /app/.venv/bin/pip install --no-cache-dir \
 
 # 2) snowflake packages next (these sometimes pull cryptography)
 RUN /app/.venv/bin/pip install --no-cache-dir \
-    snowflake-connector-python==3.0.6 \
-    snowflake-sqlalchemy==1.7.7
+    snowflake-connector-python \
+    snowflake-sqlalchemy
 
 # 3) native DB drivers last (mysqlclient, pyodbc, pymssql)
 RUN /app/.venv/bin/pip install --no-cache-dir \
