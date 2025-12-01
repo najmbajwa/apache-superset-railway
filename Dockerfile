@@ -13,7 +13,11 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Install DB drivers into Superset's virtualenv so the runtime can load them
+# create the venv so /app/.venv exists at build time
+RUN python3 -m venv /app/.venv \
+    && /app/.venv/bin/python -m pip install --upgrade pip
+
+# Install DB drivers into the venv
 RUN /app/.venv/bin/pip install --no-cache-dir \
     psycopg2-binary \
     pymongo \
@@ -38,6 +42,7 @@ COPY /config/superset_config.py /app/
 ENV SUPERSET_CONFIG_PATH /app/superset_config.py
 ENV SECRET_KEY $SECRET_KEY
 
+# ensure the venv is used at runtime: leave ENTRYPOINT as before
 USER superset
 
 ENTRYPOINT [ "./superset_init.sh" ]
