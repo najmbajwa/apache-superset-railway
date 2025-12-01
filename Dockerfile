@@ -13,7 +13,8 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install \
+# Install DB drivers into Superset's virtualenv so the runtime can load them
+RUN /app/.venv/bin/pip install --no-cache-dir \
     psycopg2-binary \
     pymongo \
     pymssql \
@@ -21,10 +22,10 @@ RUN pip install \
     mysqlclient \
     sqlalchemy \
     snowflake-connector-python \
-    snowflake-sqlalchemy 
+    snowflake-sqlalchemy
 
-RUN pip show snowflake-sqlalchemy
-RUN pip show snowflake-connector-python
+# sanity checks using the same venv
+RUN /app/.venv/bin/pip show snowflake-sqlalchemy && /app/.venv/bin/pip show snowflake-connector-python
 
 ENV ADMIN_USERNAME $ADMIN_USERNAME
 ENV ADMIN_EMAIL $ADMIN_EMAIL
