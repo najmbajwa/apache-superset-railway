@@ -22,6 +22,9 @@ RUN pip install \
     sqlalchemy \
     snowflake-sqlalchemy
 
+RUN pip show snowflake-sqlalchemy
+RUN pip show snowflake-connector-python
+
 ENV ADMIN_USERNAME $ADMIN_USERNAME
 ENV ADMIN_EMAIL $ADMIN_EMAIL
 ENV ADMIN_PASSWORD $ADMIN_PASSWORD
