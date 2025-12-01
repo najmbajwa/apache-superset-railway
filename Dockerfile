@@ -20,7 +20,8 @@ RUN pip install \
     pyodbc \
     mysqlclient \
     sqlalchemy \
-    snowflake-sqlalchemy
+    snowflake-connector-python \
+    snowflake-sqlalchemy 
 
 RUN pip show snowflake-sqlalchemy
 RUN pip show snowflake-connector-python
